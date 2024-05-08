@@ -24,11 +24,29 @@ TArvore* inserir_v1(TArvore *raiz, int num){
     return raiz;
 }
 
+void inserir_v3(TArvore **raiz, int num){
+    TArvore *aux = *raiz;
+
+    while(aux){
+        if(num < aux->valor)
+            raiz = &aux->esquerda;
+        else
+            raiz = &aux->direita;
+        aux = *raiz;
+    }
+
+    aux = calloc(1, sizeof(TArvore));
+    aux->valor = num;
+    aux->esquerda = NULL;
+    aux->direita = NULL;
+    *raiz = aux;
+}
+
 void preOrdem(TArvore* raiz){
     if(raiz == NULL){
         return;
     }
-    printf("%d\n", raiz->valor);
+    printf("%d ", raiz->valor);
     preOrdem(raiz->esquerda);
     preOrdem(raiz->direita);
 }
@@ -38,7 +56,7 @@ void ordem(TArvore* raiz){
         return;
     }
     ordem(raiz->esquerda);
-    printf("%d\n", raiz->valor);
+    printf("%d ", raiz->valor);
     ordem(raiz->direita);
 }
 
@@ -48,14 +66,34 @@ void posOrdem(TArvore* raiz){
     }
     posOrdem(raiz->esquerda);
     posOrdem(raiz->direita);
-    printf("%d\n", raiz->valor);
+    printf("%d ", raiz->valor);
 }
 
 int main(){
 
     TArvore *raiz = NULL;
 
-    raiz = inserir_v1(raiz, 50);
+    int v_raiz;
+
+    printf("Digite o valor da raiz: ");
+    scanf("%d", &v_raiz);
+
+    inserir_v3(&raiz, v_raiz);
+
+    while (1)
+    {
+        int leitura;
+
+        printf("Digite um valor para inserir na árvore: \n");
+        scanf("%d", &leitura);
+
+        if(leitura == 0)
+            break;
+
+        inserir_v3(&raiz, leitura);
+    }
+    
+    ordem(raiz);
 
     return 0;
 }
