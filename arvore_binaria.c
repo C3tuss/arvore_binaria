@@ -69,9 +69,23 @@ void posOrdem(TArvore* raiz){
     printf("%d ", raiz->valor);
 }
 
+TArvore* buscar (TArvore *raiz, int num){
+    if(raiz == NULL)
+        return NULL;
+
+    if(num == raiz->valor){
+        return raiz;
+    }else if (num < raiz->valor){
+        return buscar(raiz->esquerda, num);
+    }else{
+        return buscar(raiz->direita, num);
+    }
+}
+
 int main(){
 
     TArvore *raiz = NULL;
+    TArvore *busca = NULL;
 
     int v_raiz;
 
@@ -94,6 +108,21 @@ int main(){
     }
     
     ordem(raiz);
+
+    puts(" ");
+
+    int info;
+
+    printf("Digite um valor a ser procurado: ");
+    scanf("%d", &info);
+
+    busca = buscar(raiz, info);
+
+    if(busca){
+        printf("Valor encontrado: %d\n", busca->valor);
+    }else{
+        printf("Valor não encontrado\n");
+    }
 
     return 0;
 }
