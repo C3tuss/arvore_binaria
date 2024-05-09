@@ -82,6 +82,27 @@ TArvore* buscar (TArvore *raiz, int num){
     }
 }
 
+TArvore* remover(TArvore *raiz, int chave){
+    if(raiz == NULL){
+        printf("Valor não encontrado");
+    }else{
+        if(chave == raiz->valor){
+            if(raiz->esquerda == NULL && raiz->direita == NULL){
+                free(raiz);
+                return NULL;
+            }else{
+                //nós com filhos
+            }
+        }else{
+            if(chave < raiz->valor)
+                raiz->esquerda = remover(raiz->esquerda, chave);
+            else
+                raiz->direita = remover(raiz->direita, chave);
+            return raiz;
+        }
+    }
+}
+
 int main(){
 
     TArvore *raiz = NULL;
