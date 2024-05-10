@@ -95,7 +95,15 @@ TArvore* remover(TArvore *raiz, int chave){
             }else{
                 //remover nós que possuem 2 filhos
                 if(raiz->esquerda != NULL && raiz->direita != NULL){
-
+                    TArvore * aux = raiz->esquerda;
+                    while (aux->direita != NULL);
+                        aux = aux->direita;
+                    
+                    raiz->valor = aux->valor;
+                    aux->valor = chave;
+                    raiz->esquerda = remover(raiz->esquerda, chave);
+                    return raiz;
+                    
                 }
                 else{
                     //remover nós que possuem apenas 1 filho
@@ -130,10 +138,11 @@ int main(){
 
     inserir_v3(&raiz, v_raiz);
 
+    int leitura;
+
     while (1)
     {
-        int leitura;
-
+        
         printf("Digite um valor para inserir na árvore: \n");
         scanf("%d", &leitura);
 
@@ -159,6 +168,15 @@ int main(){
     }else{
         printf("Valor não encontrado\n");
     }
+
+    puts(" ");
+
+    printf("Digite um valor a ser removido: ");
+    scanf("%d", &leitura);
+
+    raiz = remover(raiz, leitura);
+
+    ordem(raiz);
 
     return 0;
 }
