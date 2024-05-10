@@ -86,12 +86,27 @@ TArvore* remover(TArvore *raiz, int chave){
     if(raiz == NULL){
         printf("Valor não encontrado");
     }else{
+        //proura o ná a remover
         if(chave == raiz->valor){
+            //remover nós que não possui filhos (nó folha)
             if(raiz->esquerda == NULL && raiz->direita == NULL){
                 free(raiz);
                 return NULL;
             }else{
-                //nós com filhos
+                //remover nós que possuem 2 filhos
+                if(raiz->esquerda != NULL && raiz->direita != NULL){
+
+                }
+                else{
+                    //remover nós que possuem apenas 1 filho
+                    TArvore * aux;
+                    if(raiz->esquerda != NULL)
+                        aux = raiz->esquerda;
+                    else
+                        aux = raiz->direita;
+                    free(raiz);
+                    return aux;
+                }
             }
         }else{
             if(chave < raiz->valor)
