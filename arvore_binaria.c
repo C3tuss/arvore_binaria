@@ -156,12 +156,10 @@ int main(){
 
     puts(" ");
 
-    int info;
-
     printf("Digite um valor a ser procurado: ");
-    scanf("%d", &info);
+    scanf("%d", &leitura);
 
-    busca = buscar(raiz, info);
+    busca = buscar(raiz, leitura);
 
     if(busca){
         printf("Valor encontrado: %d\n", busca->valor);
